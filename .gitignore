@@ -40,5 +40,7 @@ coverage.xml
 
 # Weaviate data
 weaviate_data/
+
+# Others
 data/
 flagged/

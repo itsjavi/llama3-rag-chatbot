@@ -1,8 +1,6 @@
-import os
-
 class Config:
-    MODEL_ID='huggingface/llama3'
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    DEBUG = True
+    EMBEDDINGS_MODEL = "nomic-embed-text"
+    LLM_MODEL = "llama3"
+
 
 config = Config()

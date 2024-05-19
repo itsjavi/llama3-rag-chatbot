@@ -1,6 +1,50 @@
-from app import app
-import config
+import gradio as gr
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import OllamaEmbeddings
+import ollama
+from config import config
 
-if __name__ == '__main__':
-    app.config.from_object(config.Config)
-    app.run(debug=config.Config.DEBUG)
+
+# Function to load, split, and retrieve documents
+def load_and_retrieve_docs(url):
+    loader = WebBaseLoader(web_paths=(url,), bs_kwargs=dict())
+    docs = loader.load()
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    splits = text_splitter.split_documents(docs)
+    embeddings = OllamaEmbeddings(model=config.EMBEDDINGS_MODEL)
+    vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings)
+    return vectorstore.as_retriever()
+
+
+# Function to format documents
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
+
+
+# Function that defines the RAG chain
+def rag_chain(url, question):
+    retriever = load_and_retrieve_docs(url)
+    retrieved_docs = retriever.invoke(question)
+    formatted_context = format_docs(retrieved_docs)
+    formatted_prompt = f"Question: {question}\n\nContext: {formatted_context}"
+    response = ollama.chat(
+        model=config.LLM_MODEL, messages=[{"role": "user", "content": formatted_prompt}]
+    )
+    return response["message"]["content"]
+
+
+# Gradio interface
+iface = gr.Interface(
+    fn=rag_chain,
+    inputs=["text", "text"],
+    outputs="text",
+    title="RAG Chain Question Answering",
+    description="Enter a URL and a query to get answers from the RAG chain.",
+)
+
+# Launch the app
+iface.launch(
+    # share=True,
+)

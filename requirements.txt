@@ -1,11 +1,5 @@
-torch
-transformers
-faiss-cpu
-flask
-
 ollama
 langchain
 langchain_community
-beautifulsoup4
 chromadb
 gradio

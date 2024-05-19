@@ -1,19 +1,25 @@
-# RAG Chatbot with LangChain, OLlama and Llama3
+# Llama3 RAG Chatbot
 
-This project demonstrates how to use these technologies together to create a chatbot that can answer questions about a webpage.
+This project demonstrates how to use Llama3 and a vector DB to create a chatbot that can answer questions about any webpage.
+
+Built using: LangChain, OLlama, Llama3, ChromaDB and Gradio UI
+
+![screenshot](demo.png)
 
 ## Pre-requisites
 
 - Python 3.11 or higher
 - OLlama server running
 
+> Only tested on macOS Sonoma with Python 3.11.x
+
 ## Setup
 
 1. Create a virtual environment:
 
    ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
+   python -m venv .venv
+   source .venv/bin/activate
    ```
 
 2. Install dependencies:
@@ -22,19 +28,15 @@ This project demonstrates how to use these technologies together to create a cha
    pip install -r requirements.txt
    ```
 
-3. Run the Flask app:
+3. Run the app:
    ```bash
-   python3 main.py
+   python main.py
    ```
 
-## Usage
+> You might need to replace `python` with `python3` depending on your system.
 
-Send a POST request to the `/chat` endpoint with a JSON payload containing the query.
+## References
 
-Example:
-
-```json
-{
-  "query": "Where is the function to calculate the costs of the orders?"
-}
-```
+- https://python.langchain.com/v0.1/docs/integrations/document_loaders/source_code/
+- https://www.trychroma.com/
+- https://www.youtube.com/watch?v=O7RdEyRsatw
