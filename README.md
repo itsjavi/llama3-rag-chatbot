@@ -1,6 +1,6 @@
 # Llama3 RAG Chatbot
 
-This project demonstrates how to use Llama3 and a vector DB to create a chatbot that can answer questions about any webpage.
+This project provides the basics and demonstrates how to use Llama3 and a vector DB to create a chatbot that can answer questions about any webpage.
 
 Built using: LangChain, OLlama, Llama3, ChromaDB and Gradio UI
 
