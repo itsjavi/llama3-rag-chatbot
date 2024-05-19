@@ -1,3 +1,12 @@
+# RAG Chatbot with LangChain, OLlama and Llama3
+
+This project demonstrates how to use these technologies together to create a chatbot that can answer questions about a webpage.
+
+## Pre-requisites
+
+- Python 3.11 or higher
+- OLlama server running
+
 ## Setup
 
 1. Create a virtual environment:

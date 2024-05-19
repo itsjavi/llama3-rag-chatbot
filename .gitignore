@@ -41,3 +41,4 @@ coverage.xml
 # Weaviate data
 weaviate_data/
 data/
+flagged/
