@@ -1,0 +1,4 @@
+torch
+transformers
+faiss-cpu
+flask
